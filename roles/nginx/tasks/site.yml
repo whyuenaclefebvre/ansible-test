@@ -1,0 +1,23 @@
+---
+- name: Creation du dossier
+  become: yes
+  when: item.repo is undefined
+  file: path=/home/{{ user }}/{{ item.domain }} state=directory owner={{ user }}
+
+- name: Clonage du site {{ item.domain }} depuis {{ item.repo }}
+  become: yes
+  when: item.repo is defined
+  git: dest=/home/{{ user }}/{{ item.domain }} clone=yes repo={{ item.repo }}
+
+- name: Lien vers www
+  become: yes
+  when: item.repo is undefined
+  file: src=/home/{{ user }}/{{ item.domain }} dest=/var/www/{{ item.domain }} state=link
+
+- name: Creation de la configuration nginx
+  template: src=template/nginx.j2 dest=/etc/nginx/sites-available/{{ item.domain }} force=yes
+  notify: nginx reload
+
+- name: Activation du domain {{ item.domain }}
+  file: src=/etc/nginx/sites-available/{{ item.domain }} dest=/etc/nginx/sites-enabled/{{ item.domain }}/ state=link
+  notify: nginx reload

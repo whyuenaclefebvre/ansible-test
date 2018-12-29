@@ -1,0 +1,28 @@
+server{
+   server_name www.{{ item.domain }};
+    return 301 $scheme://{{ item.domain }}$request_url;
+}
+
+server{
+    server_name {{ item.domain }};
+    root /var/www/{{ item.domain }};
+
+    {% if item.php %}}
+    index index.php index.html;
+
+    location ~/.php$ {
+        try_files $url =404;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $documet_root$fastcgi_script_name;
+        include fastcgi_param;
+    }
+
+    location / {
+        try_files $url $url/ /index.php?$query_string;
+    }
+
+    {% else %}
+    index index.html;
+    {% endif %}
+}

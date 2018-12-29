@@ -1,0 +1,43 @@
+---
+  - name: Installation de aptitude
+    become: yes
+    apt:
+      name: aptitude
+  - name: Update and Upgrade system
+    become: yes
+    apt:
+      upgrade: yes
+      update_cache: yes
+  # - name: Installation de git
+  #   apt: name=git update_cache=yes
+  #   # apt: 
+  #   #   name: git
+  #   #   update_cache:
+  #   become: yes
+  # - name: Installation de vim
+  #   apt: name=vim
+  #   become: yes
+  - name: "Installation de {{ name }}"
+    become: yes
+    apt: 
+      name:
+        - vim
+        - git
+        - htop
+        - zsh
+        - nodejs
+        - python
+        - composer
+        - php
+        - vagrant
+      update_cache: yes
+      state: latest
+    # old methods
+    # apt: name={{item}} update_cache=yes state=latest
+    # with_items:
+    #   - vim
+    #   - git
+    #   - htop
+    #   - zsh
+    #   - nodejs
+    #   - python

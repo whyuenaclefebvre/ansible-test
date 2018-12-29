@@ -1,0 +1,40 @@
+---
+- name: Install nginx
+  become: yes
+  apt: name=nginx state=latest
+
+- name: Start nginx
+  become: yes
+  service: name=nginx state=started enabled=true
+
+- name: Supprimer default.conf
+  become: yes
+  file: path=/etc/nginx/sites-enabled/default state= absent
+  notify: nginx reload
+
+- name: PHP
+  become: yes
+  include: php.yml
+
+- name: configuration des sites
+  become: yes
+  include: site.yml
+  with_items: domains
+
+
+# Move the following lines to site.yml
+# - name: Creation du dossier
+#   become: yes
+#   file: path=/home/{{ user }}/{{ domain }} state=directory owner={{ user }}
+
+# - name: Lien vers www
+#   become: yes
+#   file: src=/home/{{ user }}/{{ domain }} dest=/var/www/{{ domain }} state=link
+
+# - name: Creation de la configuration nginx
+#   template: src=template/nginx.j2 dest=/etc/nginx/sites-available/{{ domain }}
+
+# - name: Activation du domain {{ domain }}
+#   file: src=/etc/nginx/sites-available/{{ domain }} dest=/etc/nginx/sites-enabled/{{ domain }}/ state=link
+#   notify: nginx reload
+  

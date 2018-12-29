@@ -1,0 +1,74 @@
+---
+- name: Installation des serveurs localhost
+  hosts: localhost
+  connection: local
+  vars:
+    # user: volibear
+    # domain: local.devname: Retrait des fonctions dangereuse
+    # demains:
+    #   - local.dev
+    #   - demo.fr
+    demains:
+      - domain: local.dev
+        php: no
+        repo: https://github.com/whyuenac/whyuenac.github.io.git
+      - domain: demo.fr
+        php: yes
+  roles:
+    - utils
+    - user
+    - nginx
+
+  # tasks:
+  # - name: Installation de aptitude
+  #   become: yes
+  #   apt:
+  #     name: aptitude
+  # - name: Update and Upgrade system
+  #   become: yes
+  #   apt:
+  #     upgrade: yes
+  #     update_cache: yes
+  # # - name: Installation de git
+  # #   apt: name=git update_cache=yes
+  # #   # apt: 
+  # #   #   name: git
+  # #   #   update_cache:
+  # #   become: yes
+  # # - name: Installation de vim
+  # #   apt: name=vim
+  # #   become: yes
+  # - name: "Installation de {{ name }}"
+  #   become: yes
+  #   apt: 
+  #     name:
+  #       - vim
+  #       - git
+  #       - htop
+  #       - zsh
+  #       - nodejs
+  #       - python
+  #       - composer
+  #       - php
+  #       - vagrant
+  #     update_cache: yes
+  #     state: latest
+  #   # old methods
+  #   # apt: name={{item}} update_cache=yes state=latest
+  #   # with_items:
+  #   #   - vim
+  #   #   - git
+  #   #   - htop
+  #   #   - zsh
+  #   #   - nodejs
+  #   #   - python
+
+  # - name: Creation d'un utilisateur
+  #   when: user is defined
+  #   user: name={{ user }} comment="Mon user" shell=/usr/bin/zsh
+  # - name: Ajout de la clef SSH
+  #   when: user is defined
+  #   authorized_key: user={{ user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub' )}}"
+  # - name: "{{ user }} devient sudoers"
+  #   when: user is defined
+  #   template: src=template/sudoers.j2 dest=/etc/sudoers.d/{{ user }} validate='visudo -cf %s'
