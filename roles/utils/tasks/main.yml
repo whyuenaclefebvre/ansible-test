@@ -30,6 +30,7 @@
         - composer
         - php
         - vagrant
+        - openjdk
       update_cache: yes
       state: latest
     # old methods
