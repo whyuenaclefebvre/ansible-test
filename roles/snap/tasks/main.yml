@@ -1,0 +1,7 @@
+---
+  - name: Installation de packages via Snap
+    become: yes
+    snap:
+      name:
+        - code
+      classic: yes
