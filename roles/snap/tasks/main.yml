@@ -1,7 +1,8 @@
 ---
-  - name: Installation de packages via Snap
-    become: yes
-    snap:
-      name:
-        - code
-      classic: yes
+- name: Installation de packages via Snap
+  become: yes
+  snap:
+    name:
+      - code
+      - microk8s
+    classic: yes
