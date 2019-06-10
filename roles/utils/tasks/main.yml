@@ -31,6 +31,9 @@
       - php
       - vagrant
       - openjdk
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
     update_cache: yes
     state: latest
   # old methods
