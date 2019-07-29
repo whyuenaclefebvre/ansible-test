@@ -1,8 +1,12 @@
 ---
-- name: Installation de packages via Snap
+- name: Installation de packages via snap
   become: yes
-  snap:
-    name:
-      - code
-      - microk8s
-    classic: yes
+  command: "snap install {{ item }} --classic"
+  with_items:
+   - code
+   - microk8s
+  # snap:
+  #   name:
+  #     - code
+  #     - microk8s
+  #   classic: yes
