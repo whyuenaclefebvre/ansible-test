@@ -5,6 +5,9 @@
   with_items:
    - code
    - microk8s
+   - kubectl
+   - kubelet
+   - kubeadm
   # snap:
   #   name:
   #     - code
