@@ -3,12 +3,12 @@
   become: yes
   command: "snap install {{ item }} --classic"
   with_items:
-   - code
-   - microk8s
-   - kubectl
-   - kubelet
-   - kubeadm
-   - docker
+    - code
+    # - microk8s
+    - kubectl
+    - kubelet
+    - kubeadm
+    - docker
   # snap:
   #   name:
   #     - code

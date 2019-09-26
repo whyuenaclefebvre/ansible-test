@@ -1,7 +1,8 @@
 ---
 - name: Installation des serveurs localhost
   hosts: localhost
-  connection: local
+  # hosts: 192.168.33.10
+  # connection: local
   vars:
     # user: volibear
     # domain: local.devname: Retrait des fonctions dangereuse
