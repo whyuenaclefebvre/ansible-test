@@ -8,6 +8,7 @@
    - kubectl
    - kubelet
    - kubeadm
+   - docker
   # snap:
   #   name:
   #     - code
